@@ -15,7 +15,7 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.button)
 
         window = QWidget()
-        windo.setLayout(layout)
+        window.setLayout(layout)
 
         self.setCentralWidget(window)
 

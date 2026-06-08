@@ -2,6 +2,7 @@ from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout
 from PyQt6.QtSql import QSqlDatabase
 from db import open_connection
 from create_todo import TodoForm
+from todo_table import TodoTable
 import sys
 
 class MainWindow(QMainWindow):
@@ -13,6 +14,8 @@ class MainWindow(QMainWindow):
 
         self.todo_form = TodoForm()
         layout.addWidget(self.todo_form)
+        self.todo_table = TodoTable()
+        layout.addWidget(self.todo_table)
 
         central_widget.setLayout(layout)
         self.setCentralWidget(central_widget)

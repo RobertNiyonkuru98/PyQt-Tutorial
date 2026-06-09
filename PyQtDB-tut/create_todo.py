@@ -2,9 +2,11 @@ from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLineEdit, QCheckBox, QPushBut
 from PyQt6.QtSql import QSqlQuery
 
 class TodoForm(QWidget):
-    def __init__(self):
+    def __init__(self, on_submit_callback):
         super().__init__()
+        self.on_submit_callback = on_submit_callback
         layout = QVBoxLayout()
+
 
         # Name input
         self.name_label = QLabel("Todo Name:")
@@ -39,12 +41,13 @@ class TodoForm(QWidget):
             query.addBindValue(name)
             query.addBindValue(completed)
 
-            query.exec()
-            
+            ok = query.exec()
 
-            # add succes message
-            QMessageBox.information(self, "Success", "Todo saved successfully")
-            self.name_input.clear()
-            self.completed_checkbox.setChecked(False)
+            if ok:
+                self.on_submit_callback(name, completed)
+                # add succes message
+                QMessageBox.information(self, "Success", "Todo saved successfully")
+                self.name_input.clear()
+                self.completed_checkbox.setChecked(False)
        else:
             QMessageBox.warning(self, "Validation Error:", "Please enter a todo name.")

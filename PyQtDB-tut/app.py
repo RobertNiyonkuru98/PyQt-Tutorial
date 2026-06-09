@@ -12,14 +12,18 @@ class MainWindow(QMainWindow):
         central_widget = QWidget()
         layout = QVBoxLayout(central_widget)
 
-        self.todo_form = TodoForm()
+        self.todo_form = TodoForm(self.add_todo_to_list)
         layout.addWidget(self.todo_form)
         self.todo_table = TodoTable()
         layout.addWidget(self.todo_table)
 
         central_widget.setLayout(layout)
         self.setCentralWidget(central_widget)
-
+    
+    def add_todo_to_list(self, name, completed):
+        # Callback to add the todo item to the table
+        self.todo_table.add_todo_item(name, completed)
+        # self.todo_table.refresh_data()
 
 app = QApplication([])
 # importnant: open a connection BEFORE creating the windows

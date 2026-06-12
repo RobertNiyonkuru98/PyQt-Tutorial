@@ -7,6 +7,9 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
+        self.setWindowTitle("External Program Status Messages")
+        self.setFixedSize(400, 400)
+
         self.p = None # Default will be an empty value
 
         self.btn = QPushButton("Execute")
